@@ -26,9 +26,10 @@ class AuthController extends Controller
     {
         $credentials = $request->only( 'email', 'password' );
         if( auth()->attempt( $credentials ) ) {
-            $token = auth()->user()->createToken( 'authToken' )->accessToken;
+            $token = auth()->user()->createToken( 'authToken' )->plainTextToken;
             return new JsonResponse( [
-                'token' => $token
+                'token' => $token,
+                'user'  => auth()->user()
             ] );
         }
         // return with json response and error message

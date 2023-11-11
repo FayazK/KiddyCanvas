@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create( 'videos', function( Blueprint $table ) {
             $table->id();
+            $table->foreignId( 'user_id' )->constrained();
             $table->text( 'caption' );
             $table->timestamps();
             $table->softDeletes();
